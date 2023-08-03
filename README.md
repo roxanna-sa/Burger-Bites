@@ -1,1 +1,1 @@
-# Burger-Bites-API-client
+# Burger-Queen-API-client
