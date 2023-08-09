@@ -1,43 +1,41 @@
-import { useNavigate } from 'react-router-dom';
 import './login.scss';
+import { handleSubmit } from './loginActions.jsx';
 
-function Login () {
 
-  const navigate = useNavigate();
-  const handleClick = () => navigate('/main');
+const Login = () => {
 
   return (
   <>
-    <div className="row mt-5">
-      <div className="col-xs-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3">
-        <img src='/icons menu/logoBurger.png' className="mx-auto d-block" style={{width: "100%"}}/>
-      </div>
-    </div>
+    <div className='align-middle d-flex align-items-center justify-content-center' style={{ height: '100vh' }}>
+      <div className='row' >
+        <div className=''>
+          <img src='/icons menu/logoBurger.png' className='mx-auto d-block' style={{width: '100%'}}/>
+        </div>
 
-    <div className="row">
-      <div className="col">
-        <h3>Access</h3>
-      </div>
-    </div>
-   
-    <div className="row">
-      <div className="form-group">
-        <input placeholder="User"></input>
-      </div>
+        <div className='row'>
+          <div className='col d-flex justify-content-center my-3'>
+            <h3>Access</h3>
+          </div>
+        </div>
+      
+        <form method="post" onSubmit={handleSubmit}>
+          <div className='form-group d-flex justify-content-center mt-3 mb-3'>
+            <input id='user' name='user' placeholder='User' className='w-50'></input>
+          </div>
 
-      <div className="form-group">
-        <input placeholder="Password" type='password'></input>
+          <div className='form-group d-flex justify-content-center mt-2 mb-3'>
+            <input id='password' name='password' defaultValue='' placeholder='Password' type='password' className='w-50'></input>
+          </div>
+
+          <div className='form-group d-flex justify-content-center my-3'>
+            <button type='submit' defaultValue='' className='btn btn-mustard w-25'>Login</button>
+          </div>
+        </form>
+
       </div>
     </div>
-
-    <div className="form-group">
-        <button onClick={handleClick} className="btn btn-mustard">Login</button>
-    </div>
-    
   </>
   );
 }
-
-
 
 export default Login;
