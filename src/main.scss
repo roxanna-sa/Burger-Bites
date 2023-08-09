@@ -2,7 +2,16 @@ body {
   background-color: #FEFBF7;
 }
 
-/* Vamos a pisar el btn primary y vamos a crear nuestro nuevo botón*/
+input {
+  background-color: white;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid #B2513C;
+  background: #FFF;
+  height: 40px;
+}
+
+/* Pisar el btn primary y crear nuestro nuevo botón*/
 .btn-mustard {
   --bs-btn-color: #fff;
   --bs-btn-bg: #F0CA43;
