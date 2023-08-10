@@ -1,6 +1,6 @@
 import {createBrowserRouter} from 'react-router-dom';
 import Login from './components/pages/Login/login.jsx';
-import Main from './components/pages/Main/main.jsx';
+import CreateOrders from './components/pages/Waiter/create-orders/CreateOrders.jsx';
 
 const router = createBrowserRouter(
   [
@@ -9,8 +9,8 @@ const router = createBrowserRouter(
       element: <Login />
     },
     {
-      path: '/main',
-      element: <Main />
+      path: '/waiter/create-orders',
+      element: <CreateOrders />
     }
   ])
 
