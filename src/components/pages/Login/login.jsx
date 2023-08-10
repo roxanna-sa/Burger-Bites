@@ -1,15 +1,18 @@
 import './login.scss';
-import { handleSubmit } from './loginActions.jsx';
-
+import loginActions from './loginActions.jsx';
 
 const Login = () => {
+
+  const {
+    handleSubmit
+  } = loginActions();
 
   return (
   <>
     <div className='align-middle d-flex align-items-center justify-content-center' style={{ height: '100vh' }}>
       <div className='row' >
         <div className=''>
-          <img src='/icons menu/logoBurger.png' className='mx-auto d-block' style={{width: '100%'}}/>
+          <img src='/proyectImages/logoBurger.png' className='mx-auto d-block' style={{width: '100%'}}/>
         </div>
 
         <div className='row'>
@@ -20,7 +23,7 @@ const Login = () => {
       
         <form method="post" onSubmit={handleSubmit}>
           <div className='form-group d-flex justify-content-center mt-3 mb-3'>
-            <input id='user' name='user' placeholder='User' className='w-50'></input>
+            <input id='email' name='email' placeholder='User' className='w-50'></input>
           </div>
 
           <div className='form-group d-flex justify-content-center mt-2 mb-3'>
