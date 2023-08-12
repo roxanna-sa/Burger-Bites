@@ -6,7 +6,7 @@ export const loginActions = () => {
   const navigate = useNavigate();
 
     // Al presionar el botón "Login" inicia sesión
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
       
       event.preventDefault(); // Previene que el browser recargue la página
 
@@ -21,22 +21,30 @@ export const loginActions = () => {
 
       let json = JSON.stringify(object);
 
-      // Consumir API, método "login" con el body del formulario
-      const result = endpointRequest('post', 'login', json);
-      console.log(result)
-
-      localStorage.setItem('user', JSON.stringify(result.user));
-      localStorage.setItem('token', result.accessToken);
-      navigate('/waiter/create-orders');
-
-      // Revisar la respuesta, si es correcta, guardarla en localStorage y enviar a "página siguiente"
-
-      // Si la respuesta es incorrecta, decirle al usuario que hay un error.
-      
-    }
-
-  return { handleSubmit };
-}
+      try {
+        // Await the API call to get the response
+        const result = await endpointRequest('post', 'login', json);
+        console.log(result);
+  
+        localStorage.setItem('user', JSON.stringify(result.user));
+        localStorage.setItem('token', result.accessToken);
+  
+        if (result.user.role === 'Waiter') {
+          navigate('/waiter/create-orders');
+        } else if (result.user.role === 'Cook') {
+          navigate('/cook/kitchen');
+        } else {
+          navigate('/admin/admin-panel');
+        }
+      } catch (error) {
+        // Handle any errors that might occur during the API call
+        console.error(error);
+        // You can also provide feedback to the user about the error here
+      }
+    };
+  
+    return { handleSubmit };
+  };
 
 export default loginActions;
 
