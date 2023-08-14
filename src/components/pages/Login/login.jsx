@@ -1,11 +1,12 @@
 import './login.scss';
-import loginActions from './loginActions.jsx';
+import LoginActions from './loginActions.jsx';
+import Input from '../../element/Input/Input';
 
 const Login = () => {
 
   const {
     handleSubmit
-  } = loginActions();
+  } = LoginActions();
 
   return (
   <>
@@ -21,17 +22,23 @@ const Login = () => {
           </div>
         </div>
       
-        <form method="post" onSubmit={handleSubmit}>
-          <div className='form-group d-flex justify-content-center mt-3 mb-3'>
-            <input id='email' name='email' placeholder='User' className='w-50'></input>
-          </div>
+        <form method="post" onSubmit={handleSubmit} className='col-6 offset-3'>
+          {/* <div className='form-group mt-3'>
+            <label htmlFor='email' className='form-label w-100 mb-0'>E-mail</label>
+            <input id='email' name='email' placeholder='E-mail' className='w-100 form-control'></input>
+          </div> */}
+          <Input inputId={'email'} inputText={'E-mail'} inputType={'text'} placeHolderText={'E-mail'} divClass='form-group mt-3' />
 
-          <div className='form-group d-flex justify-content-center mt-2 mb-3'>
-            <input id='password' name='password' defaultValue='' placeholder='Password' type='password' className='w-50'></input>
-          </div>
 
-          <div className='form-group d-flex justify-content-center my-3'>
-            <button type='submit' defaultValue='' className='btn btn-mustard w-25'>Login</button>
+          {/* <div className='form-group mt-2'>
+            <label htmlFor='password' className='form-label w-100 mb-0'>Password</label>
+            <input id='password' name='password' placeholder='Password' className='w-100 form-control'></input>
+          </div> */}
+
+          <Input inputId={'password'} inputText={'Password'} inputType={'password'} placeHolderText={'Password'} divClass='form-group mt-3' />
+
+          <div className='form-group d-flex justify-content-center mt-5'>
+            <button type='submit' defaultValue='' className='btn btn-mustard w-50'>Login</button>
           </div>
         </form>
 
