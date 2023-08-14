@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import endpointRequest from '../../utils/api-request';
 
-export const loginActions = () => {
+export const LoginActions = () => {
 
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ export const loginActions = () => {
     return { handleSubmit };
   };
 
-export default loginActions;
+export default LoginActions;
 
 
 
