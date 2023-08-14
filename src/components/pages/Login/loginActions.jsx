@@ -1,29 +1,54 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from "react"
+import endpointRequest from '../../utils/api-request';
 
-// Al presionar el botón "Login" inicia sesión
-export const handleSubmit = (event) => {
-  // Previene que el browser recargue la página
-  event.preventDefault(); // no hagas el submit
+export const LoginActions = () => {
 
-  // Read the form data
-  const form = event.target;
-  const formData = new FormData(form);
+  const navigate = useNavigate();
+
+    // Al presionar el botón "Login" inicia sesión
+    const handleSubmit = async (event) => {
+      
+      event.preventDefault(); // Previene que el browser recargue la página
+
+      // Read the form data
+      const form = event.target;
+      const formData = new FormData(form);
+
+      let object = {};
+      formData.forEach(function(value, key){
+        object[key] = value;
+      });
+
+      let json = JSON.stringify(object);
+
+      try {
+        // Await the API call to get the response
+        const result = await endpointRequest('post', 'login', json);
+        console.log(result);
   
-  // Mostrar contendido del form por la consola
-  for (var [key, value] of formData.entries()) { 
-    console.log(key, value);
-  }
-
-  // Falta...
-
-  // Consumir API, método "login"
-
-  // Revisar la respuesta, si es correcta, guardarla en localStorage y enviar a "página siguiente"
-
-  // Si la respuesta es incorrecta, decirle al usuario que hay un error.
+        localStorage.setItem('user', JSON.stringify(result.user));
+        localStorage.setItem('token', result.accessToken);
   
-}
+        if (result.user.role === 'Waiter') {
+          navigate('/waiter/create-orders');
+        } else if (result.user.role === 'Cook') {
+          navigate('/cook/kitchen');
+        } else {
+          navigate('/admin/admin-panel');
+        }
+      } catch (error) {
+        // Handle any errors that might occur during the API call
+        console.error(error);
+        // You can also provide feedback to the user about the error here
+      }
+    };
+  
+    return { handleSubmit };
+  };
+
+export default LoginActions;
+
+
 
 // Como ir a otra pantalla
 // const navigate = useNavigate();
