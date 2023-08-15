@@ -1,5 +1,8 @@
+import { useState } from "react";
 
 export const CreateOrdersActions = () => {
+
+    const [selectedTab, setSelectedTab] = useState(0);
 
     // Al presionar el botón "Login" inicia sesión
     const getWaiterName = () => {
@@ -14,7 +17,7 @@ export const CreateOrdersActions = () => {
       return waiterData.name;
     };
   
-    return { getWaiterName };
+    return { getWaiterName, selectedTab, setSelectedTab };
 }
 
 export default CreateOrdersActions;

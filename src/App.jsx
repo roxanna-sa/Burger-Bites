@@ -4,29 +4,35 @@ import AdminPanel from './components/pages/Admin/AdminPanel.jsx';
 import KitchenCook from './components/pages/Cook/KitchenCook.jsx';
 import KitchenWaiter from './components/pages/Waiter/kitchen/Kitchen.jsx';
 import CreateOrders from './components/pages/Waiter/create-orders/CreateOrders.jsx';
+import Error from './components/pages/Error/error.jsx';
 
 
 const router = createBrowserRouter(
   [
     {
       path: '/',
-      element: <Login />
+      element: <Login />,
+      errorElement: <Error />
     },
     {
       path: '/waiter/create-orders',
-      element: <CreateOrders />
+      element: <CreateOrders />,
+      errorElement: <Error />
     },
     {
       path: '/waiter/kitchen',
-      element: <KitchenWaiter />
+      element: <KitchenWaiter />,
+      errorElement: <Error />
     },
     {
       path: '/cook/kitchen',
-      element: <KitchenCook />
+      element: <KitchenCook />,
+      errorElement: <Error />
     },
     {
       path: '/admin/admin-panel',
-      element: <AdminPanel />
+      element: <AdminPanel />,
+      errorElement: <Error />
     },
 
   ])

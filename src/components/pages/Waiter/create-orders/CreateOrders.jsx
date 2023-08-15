@@ -4,7 +4,9 @@ import CreateOrdersActions from './createOrdersActions.jsx';
 function CreateOrders(){
 
   const {
-    getWaiterName
+    getWaiterName,
+    selectedTab,
+    setSelectedTab
   } = CreateOrdersActions();
 
   return (
@@ -32,9 +34,19 @@ function CreateOrders(){
       {/* Segunda fila, lista de órdenes y resumen de productos */}
 
       <div className='row'>
+        <p>Selected tab: {selectedTab}</p>
       {/* Lista de ordenes  */}
         <div className='col-6'>
-          <p>Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D</p>
+          <button type='button' className='btn btn-primary col-6' onClick={() => setSelectedTab(0)} >first</button>
+          <button type='button' className='btn btn-primary col-6' onClick={() => setSelectedTab(1)}>second</button>
+
+          <div className='col-12' style={{background: 'black'}}>
+            Contenido 1
+          </div>
+
+          <div className='col-12' style={{background: 'red'}}>
+            Contenido 2
+          </div>
         </div>
 
         {/* Resumen de la orden */}
