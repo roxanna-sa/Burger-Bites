@@ -6,11 +6,15 @@ const apiInstance = axios.create({
 
 const endpointRequest = async (requestType, endpointURL, body) => {
   try {
+
+    const token = localStorage.getItem("token");
+
     const result = await apiInstance({
       method: requestType,
       url: endpointURL,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
       },
       data: body
     })
