@@ -1,0 +1,30 @@
+$textBGColor: #AEABAB;
+$textColor: black;
+$iconBGColor: #F8E6DE;
+
+
+
+.menuOption{
+  // height: 126px;
+  border-radius: 10px;
+  width: 157px;
+  background: $iconBGColor;
+
+  img{
+    height: 74px;
+    width: auto;
+  }
+
+  .menuOptionName{
+    border-radius: 10px 10px 0px 0px;
+    background: $textBGColor;
+    color: $textColor;
+  }
+
+  .menuOptionPrice{
+    border-radius: 0px 0px 10px 10px;
+    background: $textBGColor;
+    color: $textColor;
+  }
+}
+
