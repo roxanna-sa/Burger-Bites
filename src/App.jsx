@@ -3,7 +3,7 @@ import Login from './components/pages/Login/login.jsx';
 import AdminPanel from './components/pages/Admin/AdminPanel.jsx';
 import KitchenCook from './components/pages/Cook/KitchenCook.jsx';
 import KitchenWaiter from './components/pages/Waiter/kitchen/Kitchen.jsx';
-import CreateOrders from './components/pages/Waiter/create-orders/CreateOrders.jsx';
+import CreateOrders from './components/pages/Waiter/create-orders/createOrders.jsx';
 import Error from './components/pages/Error/error.jsx';
 
 

@@ -1,13 +1,36 @@
+import './createOrders.scss';
 import Input from '../../../element/Input/Input.jsx';
 import CreateOrdersActions from './createOrdersActions.jsx';
+import MenuOption from '../../../element/buttons/MenuOptions/menuOptions';
 
 function CreateOrders(){
 
   const {
     getWaiterName,
     selectedTab,
-    setSelectedTab
+    setSelectedTab,
+    products
   } = CreateOrdersActions();
+
+  function FoodOptions({ selectedTab }) {
+    if (selectedTab == 0) {
+      return (
+        <div className='col-12 divMenu'>
+          {products && products.filter(x => x.type == 'Breakfast').map((product, index) => {
+            return <MenuOption key={index} product={product}/>
+          })}
+        </div>
+      );
+    }else{
+      return (
+        <div className='col-12 divMenu'>
+        {products && products.filter(x => x.type == 'Main').map((product, index) => {
+          return <MenuOption key={index} product={product}/>
+        })}
+      </div>
+      );
+    }
+  }
 
   return (
     <>
@@ -26,7 +49,7 @@ function CreateOrders(){
 
         {/* logo corporativo */}
         <div className="col-6 pe-2">
-          <img src='/proyectImages/logoBurger.png' className='mt-3 mx-auto d-block' style={{height: '180px', width: 'auto'}}/>
+        <img src='/proyectImages/logoBurger.png' className='mt-3 mx-auto d-block' style={{height: '180px', width: 'auto'}}/>
         </div>
 
       </div>
@@ -36,17 +59,12 @@ function CreateOrders(){
       <div className='row'>
         <p>Selected tab: {selectedTab}</p>
       {/* Lista de ordenes  */}
-        <div className='col-6'>
-          <button type='button' className='btn btn-primary col-6' onClick={() => setSelectedTab(0)} >first</button>
-          <button type='button' className='btn btn-primary col-6' onClick={() => setSelectedTab(1)}>second</button>
+        <div className='col-6 ps-4'>
+          <button type='button' className={ selectedTab == 0 ? 'btn btn-tab btn-tab-rl active mx-0 col-6' : 'btn btn-tab btn-tab-rl mx-0 col-6' } onClick={() => setSelectedTab(0)}>Breakfast</button>
+          <button type='button' className={ selectedTab == 1 ? 'btn btn-tab btn-tab-rr active mx-0 col-6' : 'btn btn-tab btn-tab-rr mx-0 col-6' } onClick={() => setSelectedTab(1)}>Main</button>
 
-          <div className='col-12' style={{background: 'black'}}>
-            Contenido 1
-          </div>
-
-          <div className='col-12' style={{background: 'red'}}>
-            Contenido 2
-          </div>
+          <FoodOptions selectedTab={selectedTab} />
+          
         </div>
 
         {/* Resumen de la orden */}
