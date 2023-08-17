@@ -3,10 +3,10 @@ import './menuOptions.scss'
 const MenuOption = ({ product }) => {
   return (
     <>
-      <button type="button" className="menuOption p-0 mx-0 mt-2 mb-3">
+      <button type="button" className="menuOption p-0 mx-3 mt-2 mb-3 shadow-sm">
         <div className="menuOptionName p-0 m-0">{product.name}</div>
-        <img src="../../public/proyectImages/burger.png"></img>
-        <div className="menuOptionPrice p-0 m-0">{product.price}</div>
+        <img src={product.image} alt={product.name} />
+        <div className="menuOptionPrice p-0 m-0">${product.price}</div>
       </button>
       
     </>
@@ -14,3 +14,4 @@ const MenuOption = ({ product }) => {
 }
 
 export default MenuOption;
+
