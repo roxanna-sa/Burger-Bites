@@ -21,7 +21,7 @@ const endpointRequest = async (requestType, endpointURL, body) => {
 
     return result.data;
   }catch(error){
-    alert(error.response.data);
+    throw (error);
   }
 }
 
