@@ -2,28 +2,20 @@ import { useState, useEffect } from "react";
 import endpointRequest from "../../../utils/api-request";
 
 export const CreateOrdersActions = () => {
-
   const [selectedTab, setSelectedTab] = useState(0);
   const [products, setProducts] = useState(null);
+  const [orders, setOrders] = useState([]);
 
   // TODO: carga dos veces desde la api
   useEffect(() => {
     const loadProducts = async () => {
-
-      // Till the data is fetch using API 
-      // the Loading page will show.
-      // setLoading(true);
-
-      // Await make wait until that 
-      // promise settles and return its result
-      const productResult = await endpointRequest('get', '/products');
-      // After fetching data stored it in posts state.
-      setProducts(productResult);
-      // Closed the loading page
-      //setLoading(false);
+      try {
+        const productResult = await endpointRequest('get', '/products', null, localStorage.getItem("token"));
+        setProducts(productResult);
+      } catch (error) {
+      
+      }
     }
-
-    // Call the function
     loadProducts();
   }, []);
 
@@ -40,7 +32,42 @@ export const CreateOrdersActions = () => {
     return waiterData.name;
   };
 
-  return { getWaiterName, selectedTab, setSelectedTab, products };
+  const addToOrder = (product) => {
+    // VERFICAR SI EL PRODUCTO YA EXISTE Y SI EXISTE SUMARLE UNA CANTIDAD
+    if (orders.some(x => x.id === product.id)) {
+      const currentIndex = orders.findIndex(x => x.id === product.id);
+      // Copia del Arreglo
+      let ordersCopy = [...orders];
+      ordersCopy[currentIndex].amount += 1;
+      setOrders(ordersCopy)
+    } else {
+      setOrders([...orders, {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        amount: 1
+
+      }]);
+    }
+    //console.log(orders)
+  }
+
+  const deleteFromOrder = (productId) => {
+    if (!orders.some (x => x.id === productId)) {
+      return;
+    }
+    const currentIndex = orders.findIndex(x => x.id === productId);
+    let ordersCopy = [...orders];
+    if (orders[currentIndex].amount === 1){
+      // eliminar de lista
+      ordersCopy.splice(currentIndex, 1);
+    } else {
+      ordersCopy[currentIndex].amount -= 1;
+    }
+    setOrders(ordersCopy)
+  }
+
+  return { getWaiterName, selectedTab, setSelectedTab, products, orders, addToOrder, deleteFromOrder };
 }
 
 export default CreateOrdersActions;
