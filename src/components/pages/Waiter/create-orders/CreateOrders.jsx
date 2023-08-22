@@ -2,6 +2,8 @@ import './createOrders.scss';
 import Input from '../../../element/Input/Input.jsx';
 import CreateOrdersActions from './createOrdersActions.jsx';
 import MenuOption from '../../../element/buttons/MenuOptions/menuOptions';
+import Action from '../../../element/buttons/actionButton/actionButton';
+import OrderResume from '../../../element/orderResume/orderResume';
 
 function CreateOrders(){
 
@@ -9,7 +11,11 @@ function CreateOrders(){
     getWaiterName,
     selectedTab,
     setSelectedTab,
-    products
+    products,
+    orders,
+    addToOrder,
+    deleteFromOrder
+    
   } = CreateOrdersActions();
 
   function FoodOptions({ selectedTab }) {
@@ -17,7 +23,7 @@ function CreateOrders(){
       return (
         <div className='col-12 divMenu'>
           {products && products.filter(x => x.type == 'Breakfast').map((product, index) => {
-            return <MenuOption key={index} product={product}/>
+            return <MenuOption key={index} product={product} onClick={()=> addToOrder(product)} />
           })}
         </div>
       );
@@ -25,7 +31,7 @@ function CreateOrders(){
       return (
         <div className='col-12 divMenu'>
         {products && products.filter(x => x.type == 'Main').map((product, index) => {
-          return <MenuOption key={index} product={product}/>
+          return <MenuOption key={index} product={product}  onClick={()=> addToOrder(product)} />
         })}
       </div>
       );
@@ -69,9 +75,15 @@ function CreateOrders(){
 
         {/* Resumen de la orden */}
         <div className='col-6'>
-          <p>Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D Creamos órdenes para los clientitos :D</p>
+          <OrderResume orders={orders} onClickAdd={addToOrder} onClickDelete={deleteFromOrder} />
+          <div>
+            <Action className='btn btn-coffee' text="Botón Café" />
+            <Action className="btn btn-letucce" text="Botón Verde"  />
+          </div>
         </div>
       </div>      
+
+      
     </>
   );
 }
