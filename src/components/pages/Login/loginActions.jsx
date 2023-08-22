@@ -1,10 +1,12 @@
 import { useNavigate } from 'react-router-dom';
-import endpointRequest from '../../utils/api-request';
 import Swal from 'sweetalert2';
+import endpointRequest from '../../utils/api-request';
 
-export const LoginActions = () => {
+
+const LoginActions = () => {
 
   const navigate = useNavigate();
+
 
     // Al presionar el botón "Login" inicia sesión
     const handleSubmit = async (event) => {
@@ -24,9 +26,7 @@ export const LoginActions = () => {
 
       try {
         // Await the API call to get the response
-        const result = await endpointRequest('post', 'login', json);
-        //console.log(result);
-  
+        const result = await endpointRequest('post', 'login', json, null);
         localStorage.setItem('user', JSON.stringify(result.user));
         localStorage.setItem('token', result.accessToken);
   
