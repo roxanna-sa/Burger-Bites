@@ -1,25 +1,40 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const endpointRequest = async (requestType, endpointURL, body, token) => {
-  const apiInstance = axios.create({
-    baseURL: 'http://localhost:8080/',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
-    }
-  });
+const ApiRequest = () => {
 
-  try {
-    const result = await apiInstance({
-      method: requestType,
-      url: endpointURL,
-      data: body
+  const navigate = useNavigate();
+
+  const endpointRequest = async (requestType, endpointURL, body, token) => {
+    
+    const apiInstance = axios.create({
+      baseURL: 'http://localhost:8080/',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      }
     });
+  
+    try {
+      const result = await apiInstance({
+        method: requestType,
+        url: endpointURL,
+        data: body
+      });
+  
+      return result.data;
+    } catch (error) {
+      const errorCode = error.response.status;
+      // Chequear si no tiene autorización
+      if (errorCode == 401){
+        return navigate('/');
+      }
+  
+      throw error;
+    }
+  };
 
-    return result.data;
-  } catch (error) {
-    throw error;
-  }
-};
+  return { endpointRequest };
+}
 
-export default endpointRequest;
+export default ApiRequest;
