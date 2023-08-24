@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import endpointRequest from "../../../utils/api-request";
+import ApiRequest from "../../../utils/api-request";
 
 export const CreateOrdersActions = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   const [products, setProducts] = useState(null);
   const [orders, setOrders] = useState([]);
+  const { endpointRequest } = ApiRequest();
 
   // TODO: carga dos veces desde la api
   useEffect(() => {
@@ -66,6 +67,27 @@ export const CreateOrdersActions = () => {
     }
     setOrders(ordersCopy)
   }
+
+  
+
+  /*
+  const sendToKitchen = async (orders) => {
+
+    const userData = JSON.parse(localStorage.get('user'));
+
+    const body = {
+      userId: userData.id,
+      client: 'cliente de prueba',
+      products: [],
+      status: 'pending',
+      dateEntry: new Date()
+    };
+
+    await endpointRequest('post', '/orders', body, localStorage.getItem("token"));
+
+    setOrders([]); // vaciar orden.
+  }
+  */
 
   return { getWaiterName, selectedTab, setSelectedTab, products, orders, addToOrder, deleteFromOrder };
 }
