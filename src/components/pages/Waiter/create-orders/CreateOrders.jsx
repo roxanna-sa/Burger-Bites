@@ -15,25 +15,32 @@ function CreateOrders(){
     orders,
     addToOrder,
     deleteFromOrder
-    
   } = CreateOrdersActions();
 
   function FoodOptions({ selectedTab }) {
-    if (selectedTab == 0) {
+    if (selectedTab === 0) {
       return (
         <div className='col-12 divMenu'>
-          {products && products.filter(x => x.type == 'Breakfast').map((product, index) => {
-            return <MenuOption key={index} product={product} onClick={()=> addToOrder(product)} />
-          })}
+          <div className='row m-0'> {/* Agregar una fila para los botones en 3 columnas */}
+            {products && products.filter(x => x.type === 'Breakfast').map((product, index) => (
+              <div key={index} className='col-md-6 col-lg-4 mb-3'>
+                <MenuOption product={product} onClick={() => addToOrder(product)} />
+              </div>
+            ))}
+          </div>
         </div>
       );
-    }else{
+    } else {
       return (
         <div className='col-12 divMenu'>
-        {products && products.filter(x => x.type == 'Main').map((product, index) => {
-          return <MenuOption key={index} product={product}  onClick={()=> addToOrder(product)} />
-        })}
-      </div>
+          <div className='row m-0'> {/* Agregar una fila para los botones en 3 columnas */}
+            {products && products.filter(x => x.type === 'Main').map((product, index) => (
+              <div key={index} className='col-md-6 col-lg-4 mb-3'>
+                <MenuOption product={product} onClick={() => addToOrder(product)} />
+              </div>
+            ))}
+          </div>
+        </div>
       );
     }
   }
@@ -47,9 +54,9 @@ function CreateOrders(){
         <div className="col-6 ps-4 pe-2">
           <label className="fw-bold mt-4">Waiter: {getWaiterName()}</label>
 
-          <Input inputId={'clientsName'} inputText={'Client\'s name'} />
+          <Input  inputId={'clientsName'} inputText={'Client\'s name'} />
 
-          <Input inputId={'tableNumber'} inputText={'Table nº'} inputType='number' />
+          <Input  inputId={'tableNumber'} inputText={'Table nº'} inputType='number' />
 
         </div>
 
@@ -62,8 +69,7 @@ function CreateOrders(){
 
       {/* Segunda fila, lista de órdenes y resumen de productos */}
 
-      <div className='row'>
-        <p>Selected tab: {selectedTab}</p>
+      <div className='row mt-5'>
       {/* Lista de ordenes  */}
         <div className='col-6 ps-4'>
           <button type='button' className={ selectedTab == 0 ? 'btn btn-tab btn-tab-rl active mx-0 col-6' : 'btn btn-tab btn-tab-rl mx-0 col-6' } onClick={() => setSelectedTab(0)}>Breakfast</button>
@@ -75,10 +81,13 @@ function CreateOrders(){
 
         {/* Resumen de la orden */}
         <div className='col-6'>
-          <OrderResume orders={orders} onClickAdd={addToOrder} onClickDelete={deleteFromOrder} />
-          <div>
-            <Action className='btn btn-coffee' text="Botón Café" />
-            <Action className="btn btn-letucce" text="Botón Verde"  />
+          <div className='table-scroll'>
+            <OrderResume orders={orders} onClickAdd={addToOrder} onClickDelete={deleteFromOrder} />
+          </div>
+          
+          <div className='col-12 mt-5'>
+            <Action className='btn btn-coffee w-100' text="Send to the Kitchen" onClick={() => sendToKitchen(orders)} />
+            <Action className="btn btn-letucce w-100 mt-4" text="Check Order Status" />
           </div>
         </div>
       </div>      
