@@ -1,5 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;500&display=swap');
+
+
 .btn-coffee {
-  --bs-btn-color: #3f3939;
+  --bs-btn-color: #ffffff;
   --bs-btn-bg: #C5886E;
   --bs-btn-border-color:#C5886E;
   --bs-btn-hover-color: #3f3939;
@@ -13,6 +16,11 @@
   --bs-btn-disabled-color: rgb(253, 252, 252);
   --bs-btn-disabled-bg: gray;
   --bs-btn-disabled-border-color: gray;
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: Work Sans;
+  font-weight: 400;
+ 
 }
 
 .btn-letucce {
@@ -30,4 +38,8 @@
   --bs-btn-disabled-color: rgb(253, 252, 252);
   --bs-btn-disabled-bg: gray;
   --bs-btn-disabled-border-color: rgb(39, 36, 36);
+
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  font-family: Work Sans;
+  font-weight: 400;
 }

@@ -1,11 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import endpointRequest from '../../utils/api-request';
+import ApiRequest  from '../../utils/api-request';
+
 
 
 const LoginActions = () => {
 
   const navigate = useNavigate();
+  const { endpointRequest } = ApiRequest();
 
 
     // Al presionar el botón "Login" inicia sesión
@@ -69,6 +71,7 @@ const LoginActions = () => {
         }
       }
     }
+
     return { handleSubmit };
   };
 

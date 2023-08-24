@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;500&display=swap');
+
 .btn-tab {
   --bs-btn-color: #F8E6DE;
   --bs-btn-bg: #5B5858;
@@ -38,12 +40,21 @@
   &.btn-tab-rr{
     border-radius: 0px 10px 0px 0px;
   }
+
+  font-family: Work Sans;
+  font-weight: 400;
+  font-size: larger;
+
+  
 }
 
 .divMenu{
   background: #B2513C;
-  height: calc(100vh - 24rem);
+  height: calc(100vh - 342px);
   border-radius: 0px 0px 10px 10px;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25), 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  overflow-y: scroll;
 }
+
+
 
