@@ -1,7 +1,11 @@
 import axios from 'axios';
-import { LoginActions } from './loginActions';
+import LoginActions  from './loginActions';
 
 jest.mock('axios');
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+ useNavigate: () => jest.fn(),
+}));
 
 describe('loginActions', () => {
   it('should login successfully', async () => {
