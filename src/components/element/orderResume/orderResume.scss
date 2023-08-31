@@ -6,8 +6,7 @@
   z-index: 1;
   margin: auto;
   overflow: auto;
-  height: calc(100vh - 454px);
-  border-radius: 10px;
+  height: calc(100dvh - 454px);
 
   table {
     width: 100%;
@@ -31,6 +30,7 @@
     top: 0;
     font-weight: 700;
     font-family: Work Sans;
+    border-radius: 10px 10px 0px 0px;
   }
 
   /* safari and ios need the tfoot itself to be position:sticky also */
@@ -38,16 +38,14 @@
     position: -webkit-sticky;
     position: sticky;
     bottom: 0;
-    background: #F8E6DE;
     color: black;
     font-weight: 700;
     font-family: Work Sans;
     z-index:4;
   }
   
-  tfoot{
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
+  tfoot > tr > td{
+    box-shadow: 0 0.25rem 0.25rem 0 rgba(78, 73, 71, 0.2);
   }
     
   th:first-child {
@@ -61,6 +59,20 @@
   tfoot th:first-child {
     z-index: 5;
   }
+
+  tfoot > tr > td:first-child {
+    border-radius: 0px 0px 0px 10px;
+  }
+
+  tfoot > tr > td:last-child {
+    border-radius: 0px 0px 10px 0px;
+  }
+
+  tfoot > tr > td {
+    background: #F8E6DE;
+  }
+
+
 
     
   .col50{

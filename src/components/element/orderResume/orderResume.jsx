@@ -1,6 +1,6 @@
 import './orderResume.scss';
 
-const OrderResume = ({ orders, onClickAdd , onClickDelete }) => {
+const OrderResume = ({ orders, onClickAdd , onClickDelete, onCLickClear, canEdit = true }) => {
   const totalPrice = () => {
     let total = 0;
 
@@ -39,7 +39,7 @@ const OrderResume = ({ orders, onClickAdd , onClickDelete }) => {
           <td className='py-1' colSpan='2'>${totalPrice()}</td>
           {/* Invoca la función aquí usando los paréntesis */}
           <td className='py-0'>
-            <button type='button' className='p-0 btn btn-bin' style={{width: '20px' }}>
+            <button type='button' className='p-0 btn btn-bin' style={{width: '20px' }} onClick={onCLickClear}>
               <img src='/proyectImages/bin.png' style={{width: '100%', height: 'auto' }}></img>
             </button>
           </td>
