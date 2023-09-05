@@ -1,4 +1,3 @@
-import './login.scss';
 import LoginActions from './loginActions.jsx';
 import Input from '../../element/Input/Input';
 
@@ -11,10 +10,10 @@ const Login = () => {
 
   return (
   <>
-    <div className='align-middle d-flex align-items-center justify-content-center' style={{ height: '100vh' }}>
+    <section className='align-middle d-flex align-items-center justify-content-center' style={{ height: '100vh' }}>
       <div className='row' >
         <div className=''>
-          <img src='/proyectImages/logoBurger.png' className='mx-auto d-block' style={{width: '100%'}}/>
+          <img src='/proyectImages/logoBurger.png' className='mx-auto d-block' style={{width: '80%'}}/>
         </div>
 
         <div className='row'>
@@ -35,7 +34,7 @@ const Login = () => {
         </form>
 
       </div>
-    </div>
+    </section>
   </>
   );
 }
