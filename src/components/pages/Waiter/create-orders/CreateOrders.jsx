@@ -21,43 +21,30 @@ function CreateOrders(){
     goToOrderStatus,
     handleSendToKitchen,
     handleTable,
-    handleClientName
+    handleClientName,
+    handleClearOrder
   } = CreateOrdersActions();
 
   const { getNameOfUserInSession } = Utilities();
 
   function FoodOptions({ selectedTab }) {
-    if (selectedTab === 0) {
-      return (
-        <div className='col-12 divMenu'>
-          <div className='row m-0'> {/* Agregar una fila para los botones en 3 columnas */}
-            {products && products.filter(x => x.type === 'Breakfast').map((product, index) => (
-              <div key={index} className='col-md-6 col-lg-4 mb-3'>
-                <MenuOption product={product} onClick={() => addToOrder(product)} />
-              </div>
-            ))}
-          </div>
+    return (
+      <section className='col-12 divMenu'>
+        <div className='row m-0'> {/* Agregar una fila para los botones en 3 columnas */}
+          {products && products.filter(x => x.type === (selectedTab === 0 ? 'Breakfast' : 'Main')).map((product, index) => (
+            <div key={index} className='col-md-6 col-lg-4 mb-3'>
+              <MenuOption product={product} onClick={() => addToOrder(product)} />
+            </div>
+          ))}
         </div>
-      );
-    } else {
-      return (
-        <div className='col-12 divMenu'>
-          <div className='row m-0'> {/* Agregar una fila para los botones en 3 columnas */}
-            {products && products.filter(x => x.type === 'Main').map((product, index) => (
-              <div key={index} className='col-md-6 col-lg-4 mb-3'>
-                <MenuOption product={product} onClick={() => addToOrder(product)} />
-              </div>
-            ))}
-          </div>
-        </div>
-      );
-    }
+      </section>
+    );
   }
-
+  
   return (
     <>
       {/* Primera fila: mesero, nombre cliente, mesa y logo corporativo */}
-      <div className="row">
+      <header className="row">
 
         {/* Nombre mesero e inputs */}
         <div className="col-6 ps-4 pe-2">
@@ -75,24 +62,24 @@ function CreateOrders(){
           <img src='/proyectImages/logoBurger.png' className='mt-3 mx-auto d-block' style={{height: '180px', width: 'auto'}}/>
         </div>
 
-      </div>
+      </header>
 
       {/* Segunda fila, lista de órdenes y resumen de productos */}
 
-      <div className='row mt-5'>
+      <section className='row mt-5'>
       {/* Lista de ordenes  */}
         <div className='col-6 ps-4'>
           <button type='button' className={ selectedTab == 0 ? 'btn btn-tab btn-tab-rl active mx-0 col-6' : 'btn btn-tab btn-tab-rl mx-0 col-6' } onClick={() => setSelectedTab(0)}>Breakfast</button>
           <button type='button' className={ selectedTab == 1 ? 'btn btn-tab btn-tab-rr active mx-0 col-6' : 'btn btn-tab btn-tab-rr mx-0 col-6' } onClick={() => setSelectedTab(1)}>Main</button>
 
-          <FoodOptions selectedTab={selectedTab} />
+          <FoodOptions selectedTab={selectedTab} /> {/* Render condicional */}
           
         </div>
 
         {/* Resumen de la orden */}
         <div className='col-6'>
           <div className='table-scroll'>
-            <OrderResume orders={orders} onClickAdd={addToOrder} onClickDelete={deleteFromOrder} onCLickClear={clearOrder} />
+            <OrderResume orders={orders} onClickAdd={addToOrder} onClickDelete={deleteFromOrder} onCLickClear={handleClearOrder} />
           </div>
           
           <div className='col-12 mt-5'>
@@ -100,7 +87,7 @@ function CreateOrders(){
             <Action className= 'btn btn-coffee w-100 mt-4' text="Check Order Status" onClick={goToOrderStatus} />
           </div>
         </div>
-      </div>      
+      </section>      
 
       
     </>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ApiRequest from "../../../utils/services/api-request";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export const CreateOrdersActions = () => {
   const [selectedTab, setSelectedTab] = useState(0);
@@ -92,23 +93,66 @@ export const CreateOrdersActions = () => {
     setOrders([]);
   }
 
+  const handleClearOrder = () => {
+    if(orders.length > 0){
+      Swal.fire({
+        title: 'Are you sure?',
+        text: 'This order will be permanently deleted',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Delete it',
+        confirmButtonColor: '#B2513C',
+        cancelButtonText: 'Go back'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          clearOrder(); // Llama a clearOrder solo si el usuario confirma
+        }
+      });
+    }
+  };
+
   const handleClientName = (e) => setClientName(e.target.value);
 
   const handleTable = (e) => setTable(e.target.value);
 
   const handleSendToKitchen = async () => {
-    await sendToKitchen(orders, table, clientName);
-
-    // Vaciar los campos de entrada después de enviar a la cocina
-    setClientName('');
-    setTable('');
+    if(orders.length > 0 && clientName !== '' && table !== '') {
+      // Muestra una alerta de confirmación
+      Swal.fire({
+        title: 'Confirmation',
+        text: 'Is this ready for the kitchen?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, send it!',
+        confirmButtonColor: '#8dbe79',
+        cancelButtonText: 'Cancel :(',
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          // Si el usuario confirma, llama a la función sendToKitchen
+          await sendToKitchen(orders, table, clientName);
+    
+          // Vacía los campos de entrada después de enviar a la cocina
+          setClientName('');
+          setTable('');
+        }
+      });
+    }else{
+      // Muestra una alerta de error
+      Swal.fire({
+        title: 'Error',
+        text: 'All fields are required',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        confirmButtonColor: '#B2513C',
+      });
+    }
   };
 
   const sendToKitchen = async (orders, table, clientName) => {
 
     const userData = JSON.parse(localStorage.getItem('user'));
 
-    const body = {
+    const body = {  // data model
       userId: userData.id,
       table: table,
       client: clientName,
@@ -127,7 +171,7 @@ export const CreateOrdersActions = () => {
     navigate('/waiter/kitchen');
   }
 
-  return { selectedTab, setSelectedTab, products, orders, addToOrder, deleteFromOrder, clearOrder, clientName, table, handleClientName, handleTable, handleSendToKitchen, goToOrderStatus };
+  return { selectedTab, setSelectedTab, products, orders, addToOrder, deleteFromOrder, clearOrder, clientName, table, handleClientName, handleTable, handleSendToKitchen, goToOrderStatus, handleClearOrder };
 }
 
 export default CreateOrdersActions;
