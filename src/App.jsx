@@ -1,10 +1,9 @@
 import {createBrowserRouter} from 'react-router-dom';
 import Login from './components/pages/Login/login.jsx';
 import AdminPanel from './components/pages/Admin/AdminPanel.jsx';
-import KitchenCook from './components/pages/Cook/KitchenCook.jsx';
-import KitchenWaiter from './components/pages/Waiter/kitchen/Kitchen.jsx';
-import CreateOrders from './components/pages/Waiter/create-orders/createOrders.jsx';
+import CreateOrders from './components/pages/Waiter/create-orders/CreateOrders.jsx';
 import Error from './components/pages/Error/error.jsx';
+import Kitchen from './components/pages/SharedView/kitchen/kitchen.jsx';
 
 
 const router = createBrowserRouter(
@@ -21,12 +20,12 @@ const router = createBrowserRouter(
     },
     {
       path: '/waiter/kitchen',
-      element: <KitchenWaiter />,
+      element: <Kitchen />,
       errorElement: <Error />
     },
     {
       path: '/cook/kitchen',
-      element: <KitchenCook />,
+      element: <Kitchen />,
       errorElement: <Error />
     },
     {

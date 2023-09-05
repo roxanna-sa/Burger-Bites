@@ -11,7 +11,13 @@
     overflow-y: scroll;
   }
 
-  font-family: Work Sans;
   font-weight: 400;
 }
+
+@media (orientation: landscape) {
+  .orderContainer{
+    height: 15dvh !important;
+  }
+}
+
 
